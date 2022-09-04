@@ -47,18 +47,19 @@ class BokehWebapp:
         handler = FunctionHandler(fnc_make_document)
         app = Application(handler)
 
-        if iplot and 'ipykernel' in sys.modules:
-            show(app, notebook_url=notebook_url)
-        else:
-            apps = {'/': app}
+#         if iplot and 'ipykernel' in sys.modules:
+#             show(app, notebook_url=notebook_url)
+#         else:
+        # disable ipykernel check
+        apps = {'/': app}
 
-            print(f"Browser is launching at: http://localhost:{port}")
-            threading.Timer(2, lambda: webbrowser.open(f'http://localhost:{port}')).start()
-            
-            server = Server(apps, port=port, io_loop=ioloop)
-            if ioloop is None:
-                server.run_until_shutdown()
-            else:
-                server.start()
-                ioloop.start()
+        print(f"Browser is launching at: http://localhost:{port}")
+        threading.Timer(2, lambda: webbrowser.open(f'http://localhost:{port}')).start()
+
+        server = Server(apps, port=port, io_loop=ioloop)
+        if ioloop is None:
+            server.run_until_shutdown()
+        else:
+            server.start()
+            ioloop.start()
 
