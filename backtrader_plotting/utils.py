@@ -24,7 +24,10 @@ def paramval2str(name, value):
     elif isinstance(value, float):
         return f"{value:.2f}"
     elif isinstance(value, (list,tuple)):
-        return ','.join(value)
+        try:
+            return ','.join(value)
+        except:
+            return str(value)
     elif isinstance(value, type):
         return value.__name__
     else:
